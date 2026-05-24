@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cast TV Remote - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --accent-color: #38bdf8;
+            --accent-success: #4ade80;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        .menu-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-item.active a, .nav-item a:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .stat-info p {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .stat-card:nth-child(2) .stat-icon {
+            background-color: rgba(74, 222, 128, 0.1);
+            color: var(--accent-success);
+        }
+
+        /* Charts & Details Section */
+        .dashboard-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Custom Progress Bars for Usage */
+        .usage-metric {
+            margin-bottom: 20px;
+        }
+
+        .metric-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .metric-bar-bg {
+            background-color: var(--border-color);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .metric-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-success));
+            border-radius: 4px;
+        }
+
+        /* Policy & Status List */
+        .status-list {
+            list-style: none;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-item i {
+            margin-top: 4px;
+        }
+
+        .status-item.success i { color: var(--accent-success); }
+        .status-item.info i { color: var(--accent-color); }
+
+        .status-text h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .status-text p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .dashboard-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .main-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-tv"></i>
+            <span>SmartCast TV</span>
+        </div>
+        <p class="menu-label">Tổng quan</p>
+        <ul class="nav-links">
+            <li class="nav-item active">
+                <a href="#"><i class="fa-solid fa-chart-pie"></i> Bảng điều khiển</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://hdcorp.org/policy/smartcasttvremote/" target="_blank"><i class="fa-solid fa-shield-halved"></i> Chính sách bảo mật</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div>
+                <h1>Ứng dụng Smart Cast TV Remote</h1>
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Hệ thống giám sát hiệu năng & tính năng cốt lõi</p>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-info">
+                    <h3>Tỷ lệ kết nối thành công</h3>
+                    <p>98.4%</p>
+                </div>
+                <div class="stat-icon"><i class="fa-solid fa-wifi"></i></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <h3>Độ trễ truyền tải (Mirroring)</h3>
+                    <p>&lt; 40ms</p>
+                </div>
+                <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <h3>Số thương hiệu TV hỗ trợ</h3>
+                    <p>100+</p>
+                </div>
+                <div class="stat-icon"><i class="fa-solid fa-list"></i></div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            
+            <div class="card">
+                <div class="card-title">
+                    <span>Tần suất sử dụng tính năng</span>
+                    <i class="fa-solid fa-chart-bar" style="color: var(--text-muted);"></i>
+                </div>
+                
+                <div class="usage-metric">
+                    <div class="metric-info">
+                        <span>Điều khiển từ xa (Universal Remote)</span>
+                        <strong>85%</strong>
+                    </div>
+                    <div class="metric-bar-bg">
+                        <div class="metric-bar-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <div class="usage-metric">
+                    <div class="metric-info">
+                        <span>Trình chiếu đa phương tiện (Media Casting)</span>
+                        <strong>65%</strong>
+                    </div>
+                    <div class="metric-bar-bg">
+                        <div class="metric-bar-fill" style="width: 65%;"></div>
+                    </div>
+                </div>
+
+                <div class="usage-metric">
+                    <div class="metric-info">
+                        <span>Phản chiếu màn hình (Screen Mirroring)</span>
+                        <strong>45%</strong>
+                    </div>
+                    <div class="metric-bar-bg">
+                        <div class="metric-bar-fill" style="width: 45%;"></div>
+                    </div>
+                </div>
+
+                <div class="usage-metric">
+                    <div class="metric-info">
+                        <span>Truyền tải từ Web (Web Video Cast)</span>
+                        <strong>30%</strong>
+                    </div>
+                    <div class="metric-bar-bg">
+                        <div class="metric-bar-fill" style="width: 30%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>Cam kết bảo mật (Policy)</span>
+                    <i class="fa-solid fa-user-shield" style="color: var(--accent-success);"></i>
+                </div>
+                
+                <ul class="status-list">
+                    <li class="status-item success">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div class="status-text">
+                            <h4>Không lưu trữ dữ liệu cá nhân</h4>
+                            <p>Không ghi lại lịch sử stream video hoặc hình ảnh cá nhân.</p>
+                        </div>
+                    </li>
+                    <li class="status-item success">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div class="status-text">
+                            <h4>Mã hóa đường truyền mạng cục bộ</h4>
+                            <p>Mọi tín hiệu điều khiển chỉ chạy trong mạng Wi-Fi nội bộ.</p>
+                        </div>
+                    </li>
+                    <li class="status-item info">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <div class="status-text">
+                            <h4>Quyền truy cập mạng (LAN)</h4>
+                            <p>Chỉ yêu cầu quyền tìm kiếm thiết bị cùng lớp mạng LAN.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
