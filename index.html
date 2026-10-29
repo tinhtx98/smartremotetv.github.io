@@ -3,379 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Cast TV Remote - Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Smart Mirror Screen &amp; Cast TV - Privacy Policy</title>
     <style>
-        :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --accent-color: #38bdf8;
-            --accent-success: #4ade80;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
+        * { box-sizing: border-box; }
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            display: flex;
-            min-height: 100vh;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: #222;
+            background: #f5f6f8;
         }
-
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background-color: var(--bg-secondary);
-            border-right: 1px solid var(--border-color);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 40px;
-        }
-
-        .menu-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-
-        .nav-links {
-            list-style: none;
-        }
-
-        .nav-item a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: all 0.3s;
-        }
-
-        .nav-item.active a, .nav-item a:hover {
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent-color);
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-
-        .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .stat-info h3 {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .stat-info p {
-            font-size: 28px;
-            font-weight: 700;
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent-color);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .stat-card:nth-child(2) .stat-icon {
-            background-color: rgba(74, 222, 128, 0.1);
-            color: var(--accent-success);
-        }
-
-        /* Charts & Details Section */
-        .dashboard-section {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-        }
-
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Custom Progress Bars for Usage */
-        .usage-metric {
-            margin-bottom: 20px;
-        }
-
-        .metric-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .metric-bar-bg {
-            background-color: var(--border-color);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .metric-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-color), var(--accent-success));
-            border-radius: 4px;
-        }
-
-        /* Policy & Status List */
-        .status-list {
-            list-style: none;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .status-item:last-child {
-            border-bottom: none;
-        }
-
-        .status-item i {
-            margin-top: 4px;
-        }
-
-        .status-item.success i { color: var(--accent-success); }
-        .status-item.info i { color: var(--accent-color); }
-
-        .status-text h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .status-text p {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .dashboard-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); }
-            .main-content { padding: 20px; }
+        .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+        header { background: #1a73e8; color: #fff; padding: 36px 0; }
+        header h1 { margin: 0 0 6px; font-size: 28px; }
+        header p { margin: 0; opacity: .9; }
+        main { background: #fff; margin: 24px auto; padding: 28px 32px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+        h2 { margin-top: 36px; padding-bottom: 6px; border-bottom: 2px solid #e3e6ea; font-size: 21px; color: #1a73e8; }
+        h3 { margin-top: 22px; font-size: 17px; }
+        ul { padding-left: 22px; }
+        li { margin-bottom: 6px; }
+        a { color: #1a73e8; }
+        .toc { background: #f0f4fb; border-radius: 6px; padding: 14px 20px; }
+        .toc ol { margin: 6px 0 0; padding-left: 20px; }
+        .contact-card { background: #f0f4fb; border-left: 4px solid #1a73e8; border-radius: 6px; padding: 14px 20px; }
+        .contact-item { margin: 4px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 15px; }
+        th, td { border: 1px solid #dde1e6; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f0f4fb; }
+        footer { text-align: center; color: #666; font-size: 14px; padding: 16px 0 32px; }
+        footer p { margin: 4px 0; }
+        @media (max-width: 600px) {
+            main { padding: 20px 16px; }
+            header h1 { font-size: 23px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="brand">
-            <i class="fa-solid fa-tv"></i>
-            <span>SmartCast TV</span>
+    <header>
+        <div class="container">
+            <h1>Smart Mirror Screen &amp; Cast TV &ndash; Privacy Policy</h1>
+            <p>Effective date: October 29, 2026 &nbsp;|&nbsp; Last updated: October 29, 2026</p>
         </div>
-        <p class="menu-label">Overview</p>
-        <ul class="nav-links">
-            <li class="nav-item active">
-                <a href="#"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a href="https://hdcorp.org/policy/smartcasttvremote/" target="_blank"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
-            </li>
-        </ul>
-    </div>
+    </header>
 
-    <div class="main-content">
-        <div class="header">
-            <div>
-                <h1>Smart Cast TV Remote App</h1>
-                <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Performance Monitoring & Core Metrics System</p>
-            </div>
-        </div>
+    <main class="container">
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-info">
-                    <h3>Connection Success Rate</h3>
-                    <p>98.4%</p>
-                </div>
-                <div class="stat-icon"><i class="fa-solid fa-wifi"></i></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <h3>Mirroring Latency</h3>
-                    <p>&lt; 40ms</p>
-                </div>
-                <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <h3>Supported TV Brands</h3>
-                    <p>100+</p>
-                </div>
-                <div class="stat-icon"><i class="fa-solid fa-list"></i></div>
-            </div>
+        <section id="intro">
+            <p>
+                This Privacy Policy explains how <strong>HD Corporation</strong> ("we", "us", "our") collects, uses,
+                shares, and protects information when you use the <strong>Smart Mirror Screen &amp; Cast TV</strong>
+                mobile application (the "App"). By downloading, installing, or using the App, you agree to the
+                practices described in this policy. If you do not agree, please do not use the App.
+            </p>
+        </section>
+
+        <div class="toc">
+            <strong>Contents</strong>
+            <ol>
+                <li><a href="#about">About the App</a></li>
+                <li><a href="#collect">Information We Collect</a></li>
+                <li><a href="#casting">Screen Mirroring and Casting Data</a></li>
+                <li><a href="#permissions">App Permissions</a></li>
+                <li><a href="#use">How We Use Information</a></li>
+                <li><a href="#sharing">Sharing and Disclosure</a></li>
+                <li><a href="#thirdparty">Third-Party Services</a></li>
+                <li><a href="#ads">Advertising</a></li>
+                <li><a href="#purchases">In-App Purchases and Subscriptions</a></li>
+                <li><a href="#retention">Data Retention</a></li>
+                <li><a href="#security">Data Security</a></li>
+                <li><a href="#rights">Your Rights and Choices</a></li>
+                <li><a href="#children">Children's Privacy</a></li>
+                <li><a href="#transfers">International Data Transfers</a></li>
+                <li><a href="#changes">Changes to This Policy</a></li>
+                <li><a href="#contact">Contact Support</a></li>
+            </ol>
         </div>
 
-        <div class="dashboard-section">
-            
-            <div class="card">
-                <div class="card-title">
-                    <span>Feature Usage Frequency</span>
-                    <i class="fa-solid fa-chart-bar" style="color: var(--text-muted);"></i>
-                </div>
-                
-                <div class="usage-metric">
-                    <div class="metric-info">
-                        <span>Universal Remote Control</span>
-                        <strong>85%</strong>
-                    </div>
-                    <div class="metric-bar-bg">
-                        <div class="metric-bar-fill" style="width: 85%;"></div>
-                    </div>
-                </div>
+        <section id="about">
+            <h2>1. About the App</h2>
+            <p>
+                Smart Mirror Screen &amp; Cast TV lets you mirror your phone screen to a smart TV or compatible
+                display, and cast photos, videos, and audio from your device to that display over your local Wi-Fi
+                network. Mirroring and casting happen directly between your device and your TV on your local network.
+                We do not receive, store, or have access to the content you mirror or cast.
+            </p>
+        </section>
 
-                <div class="usage-metric">
-                    <div class="metric-info">
-                        <span>Media Casting</span>
-                        <strong>65%</strong>
-                    </div>
-                    <div class="metric-bar-bg">
-                        <div class="metric-bar-fill" style="width: 65%;"></div>
-                    </div>
-                </div>
+        <section id="collect">
+            <h2>2. Information We Collect</h2>
 
-                <div class="usage-metric">
-                    <div class="metric-info">
-                        <span>Screen Mirroring</span>
-                        <strong>45%</strong>
-                    </div>
-                    <div class="metric-bar-bg">
-                        <div class="metric-bar-fill" style="width: 45%;"></div>
-                    </div>
-                </div>
+            <h3>2.1 Information you provide</h3>
+            <p>
+                We do not require you to create an account or provide your name, phone number, or address to use the
+                App. If you contact us by email, we receive your email address and any information you choose to
+                include in your message.
+            </p>
 
-                <div class="usage-metric">
-                    <div class="metric-info">
-                        <span>Web Video Cast</span>
-                        <strong>30%</strong>
-                    </div>
-                    <div class="metric-bar-bg">
-                        <div class="metric-bar-fill" style="width: 30%;"></div>
-                    </div>
+            <h3>2.2 Information collected automatically</h3>
+            <ul>
+                <li><strong>Device information:</strong> device model, manufacturer, operating system version, language, screen size, and system settings relevant to compatibility.</li>
+                <li><strong>Usage information:</strong> which features you use, screens viewed, button interactions, session length, and app version.</li>
+                <li><strong>Diagnostic information:</strong> crash reports, error logs, and performance data used to find and fix bugs.</li>
+                <li><strong>Identifiers:</strong> advertising ID (such as Google Advertising ID), app instance ID, and similar identifiers that do not directly identify you.</li>
+                <li><strong>Approximate location:</strong> derived from your IP address (country or region level only). We do not collect precise GPS location.</li>
+                <li><strong>Purchase information:</strong> status of your subscription or purchase, processed by Google Play. We do not receive your payment card details.</li>
+            </ul>
+
+            <h3>2.3 Information related to your local network</h3>
+            <p>
+                To find and connect to TVs and display devices, the App scans your local Wi-Fi network. It may process
+                device names, model information, and local network addresses (such as IP addresses) of nearby
+                compatible devices. This information is used only to establish the connection, and is kept on your
+                device. We do not collect the names or contents of other devices on your network.
+            </p>
+
+            <h3>2.4 Information we do not collect</h3>
+            <ul>
+                <li>We do not collect or store the video, audio, or images shown during screen mirroring.</li>
+                <li>We do not collect the photos, videos, or music you cast.</li>
+                <li>We do not collect your contacts, call logs, or SMS messages.</li>
+                <li>We do not collect precise location, biometric, or health data.</li>
+            </ul>
+        </section>
+
+        <section id="casting">
+            <h2>3. Screen Mirroring and Casting Data</h2>
+            <ul>
+                <li><strong>Screen mirroring:</strong> when you start mirroring, Android asks for your permission to capture your screen. Everything displayed on your screen, including notifications and private information, may be visible on the TV while mirroring is active. Stop mirroring before opening sensitive content.</li>
+                <li><strong>Direct transfer:</strong> mirrored and cast content is sent directly from your device to your TV over your local network. It does not pass through our servers.</li>
+                <li><strong>No recording:</strong> we do not record, save, or analyze your mirrored screen or cast media.</li>
+                <li><strong>Audio:</strong> where the App transmits device audio together with the screen, it is used only for playback on the TV and is not stored.</li>
+                <li><strong>Third-party receivers:</strong> the TV or display you connect to is operated by its manufacturer, and its handling of the content is governed by that manufacturer's own privacy policy.</li>
+            </ul>
+        </section>
+
+        <section id="permissions">
+            <h2>4. App Permissions</h2>
+            <p>The App may request the following permissions. Each is used only for the purpose described.</p>
+            <table>
+                <thead>
+                    <tr><th>Permission</th><th>Purpose</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Internet / network state</td>
+                        <td>To display ads, process purchases, send analytics and crash reports, and check connectivity.</td>
+                    </tr>
+                    <tr>
+                        <td>Wi-Fi state and multicast / nearby devices</td>
+                        <td>To discover TVs and display devices on your local network and connect to them.</td>
+                    </tr>
+                    <tr>
+                        <td>Screen capture (system prompt)</td>
+                        <td>To mirror your screen to the TV. Android asks for your consent each time mirroring starts.</td>
+                    </tr>
+                    <tr>
+                        <td>Photos, videos, and audio (media access)</td>
+                        <td>To let you browse and select media on your device to cast to the TV. Files are not uploaded to us.</td>
+                    </tr>
+                    <tr>
+                        <td>Microphone (where applicable)</td>
+                        <td>To transmit audio during mirroring when you choose to enable it. Audio is not recorded or stored.</td>
+                    </tr>
+                    <tr>
+                        <td>Foreground service and notifications</td>
+                        <td>To keep mirroring or casting running in the background and show a notification while it is active.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>You can review or revoke permissions at any time in your device's system settings. Some features may not work without them.</p>
+        </section>
+
+        <section id="use">
+            <h2>5. How We Use Information</h2>
+            <ul>
+                <li>To provide, operate, and maintain screen mirroring and casting features.</li>
+                <li>To analyze and improve performance, stability, and user experience.</li>
+                <li>To detect, diagnose, and fix crashes, bugs, and connection issues.</li>
+                <li>To show advertisements and measure their effectiveness.</li>
+                <li>To process and verify in-app purchases and subscriptions.</li>
+                <li>To respond to your support requests and inquiries.</li>
+                <li>To protect against fraud, abuse, and security threats.</li>
+                <li>To comply with legal obligations.</li>
+            </ul>
+        </section>
+
+        <section id="sharing">
+            <h2>6. Sharing and Disclosure</h2>
+            <p>We do not sell your personal information. We may share information only in these situations:</p>
+            <ul>
+                <li><strong>Service providers:</strong> third parties that help us run the App (analytics, crash reporting, advertising, billing), who may process data only on our behalf or under their own privacy policies.</li>
+                <li><strong>Legal reasons:</strong> when required by law, regulation, legal process, or a valid government request.</li>
+                <li><strong>Protection of rights:</strong> to enforce our terms, protect our rights, users, or the public, or investigate fraud or security issues.</li>
+                <li><strong>Business transfers:</strong> in connection with a merger, acquisition, or sale of assets, in which case we will notify you of any change in how your information is handled.</li>
+                <li><strong>With your consent:</strong> in any other case where you have given us permission.</li>
+            </ul>
+        </section>
+
+        <section id="thirdparty">
+            <h2>7. Third-Party Services</h2>
+            <p>The App may use the following third-party services, each governed by its own privacy policy:</p>
+            <ul>
+                <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Play Services</a></li>
+                <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Analytics and Crashlytics</a></li>
+                <li><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">Google AdMob</a></li>
+                <li><a href="https://play.google.com/about/play-terms/" target="_blank" rel="noopener">Google Play Billing</a></li>
+            </ul>
+            <p>We are not responsible for the privacy practices of these third parties. We encourage you to review their policies.</p>
+        </section>
+
+        <section id="ads">
+            <h2>8. Advertising</h2>
+            <p>
+                The App may display ads provided by Google AdMob and its partners. These services may use your
+                advertising ID and device information to serve and measure ads, and may show personalized ads based on
+                your interests where permitted by law.
+            </p>
+            <ul>
+                <li>You can reset your advertising ID or opt out of ad personalization in your device settings (<em>Settings &gt; Google &gt; Ads</em>).</li>
+                <li>Where required (for example in the EEA and UK), we request your consent before showing personalized ads, and you can change your choice at any time.</li>
+                <li>Opting out does not remove ads; the ads you see will be less relevant.</li>
+            </ul>
+        </section>
+
+        <section id="purchases">
+            <h2>9. In-App Purchases and Subscriptions</h2>
+            <p>
+                Premium features may be offered through in-app purchases or subscriptions processed by Google Play.
+                Payments are handled entirely by Google; we never see or store your full payment details. We receive
+                only the information needed to confirm that your purchase is active. Subscriptions can be managed or
+                cancelled in the Google Play Store under <em>Payments &amp; subscriptions</em>.
+            </p>
+        </section>
+
+        <section id="retention">
+            <h2>10. Data Retention</h2>
+            <p>
+                We keep analytics and diagnostic data only as long as necessary for the purposes described in this
+                policy, or as required by law. Data collected by third-party services is retained according to their
+                policies. Information stored locally on your device, such as recently connected TVs, is removed when
+                you clear the App's data or uninstall the App. Support emails are retained only as long as needed to
+                resolve your request.
+            </p>
+        </section>
+
+        <section id="security">
+            <h2>11. Data Security</h2>
+            <p>
+                We use reasonable technical and organizational measures to protect information against unauthorized
+                access, loss, misuse, or disclosure, including encrypted transmission (HTTPS) where applicable. No
+                method of transmission or storage is completely secure, so we cannot guarantee absolute security.
+            </p>
+            <p>
+                Because mirroring and casting take place over your local network, we recommend using a trusted,
+                password-protected Wi-Fi network and avoiding public networks when sharing private content.
+            </p>
+        </section>
+
+        <section id="rights">
+            <h2>12. Your Rights and Choices</h2>
+            <p>Depending on where you live, you may have the right to:</p>
+            <ul>
+                <li>Access the personal information we hold about you.</li>
+                <li>Request correction or deletion of your personal information.</li>
+                <li>Object to or restrict certain processing, or withdraw consent at any time.</li>
+                <li>Request a portable copy of your data.</li>
+                <li>Opt out of personalized advertising.</li>
+                <li>Lodge a complaint with your local data protection authority.</li>
+            </ul>
+            <p>
+                You can also control data collection by revoking permissions, resetting your advertising ID, clearing
+                the App's data, or uninstalling the App. To exercise your rights, contact us using the details in the
+                <a href="#contact">Contact Support</a> section. We may need to verify your identity before responding.
+            </p>
+
+            <h3>Region-specific notices</h3>
+            <ul>
+                <li><strong>EEA / UK (GDPR):</strong> our legal bases for processing are your consent, performance of a contract, our legitimate interests (improving and securing the App), and compliance with legal obligations.</li>
+                <li><strong>California (CCPA/CPRA):</strong> we do not sell personal information. You may request to know, delete, or correct your information, and you will not be discriminated against for exercising your rights.</li>
+            </ul>
+        </section>
+
+        <section id="children">
+            <h2>13. Children's Privacy</h2>
+            <p>
+                Smart Mirror Screen &amp; Cast TV is not directed to children under 13 (or the minimum age required in
+                your country). We do not knowingly collect personal information from children. If you believe a child
+                has provided us with personal information, please contact us and we will delete it promptly.
+            </p>
+        </section>
+
+        <section id="transfers">
+            <h2>14. International Data Transfers</h2>
+            <p>
+                Our service providers may process information in countries other than your own, which may have
+                different data protection laws. Where required, we rely on appropriate safeguards for such transfers.
+            </p>
+        </section>
+
+        <section id="changes">
+            <h2>15. Changes to This Policy</h2>
+            <p>
+                We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date
+                above and, for material changes, provide additional notice in the App or on this page. Your continued
+                use of the App after changes take effect means you accept the updated policy.
+            </p>
+        </section>
+
+        <section id="contact">
+            <h2>16. Contact Support</h2>
+            <p>If you need further assistance, have technical inquiries, or business proposals, please reach out to our support team.</p>
+
+            <div class="contact-card">
+                <div class="contact-item">
+                    <strong>Company:</strong> <span>HD Corporation</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Representative:</strong> <span>Nguy·ªÖn VƒÉn ƒê·ªãnh</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Email:</strong> <span><a href="mailto:vandinh1308@gmail.com">vandinh1308@gmail.com</a></span>
                 </div>
             </div>
+        </section>
 
-            <div class="card">
-                <div class="card-title">
-                    <span>Privacy Commitments (Policy)</span>
-                    <i class="fa-solid fa-user-shield" style="color: var(--accent-success);"></i>
-                </div>
-                
-                <ul class="status-list">
-                    <li class="status-item success">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <div class="status-text">
-                            <h4>Zero Personal Data Storage</h4>
-                            <p>We do not store or track your personal video streaming or media histories.</p>
-                        </div>
-                    </li>
-                    <li class="status-item success">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <div class="status-text">
-                            <h4>Local Network Encryption</h4>
-                            <p>All control signals are safely processed strictly inside your local Wi-Fi network.</p>
-                        </div>
-                    </li>
-                    <li class="status-item info">
-                        <i class="fa-solid fa-circle-info"></i>
-                        <div class="status-text">
-                            <h4>LAN Network Permissions</h4>
-                            <p>Only requires permissions to search for casting devices within the same LAN segment.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    </main>
 
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HD Corporation. All rights reserved.</p>
+            <p>Smart Mirror Screen &amp; Cast TV Support Desk</p>
         </div>
-    </div>
+    </footer>
 
 </body>
 </html>
